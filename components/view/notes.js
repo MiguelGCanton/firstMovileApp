@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { Text, View, ScrollView, StyleSheet, Dimensions, TouchableOpacity, Button } from 'react-native'
 import Navbar from '../navbar' 
 import Card from '../card' 
 
@@ -26,7 +26,27 @@ const cards= [
         color: "yellow"
     },
     {
-        title: "la tristeza de un rey",
+        title: " el último rey",
+        content: " lqkwjsaljdasljdsaljasd lkajsldkjasdljasdlkas ",
+        color: "pink"
+    },
+    {
+        title: "Los nuevos sueños, de un dios en sus ultimos momentos",
+        content: "introducir información",
+        color: "yellow"
+    },
+    {
+        title: " el último rey",
+        content: " lqkwjsaljdasljdsaljasd lkajsldkjasdljasdlkas ",
+        color: "pink"
+    },
+    {
+        title: "Los nuevos sueños, de un dios en sus ultimos momentos",
+        content: "introducir información",
+        color: "yellow"
+    },
+    {
+        title: " el último rey",
         content: " lqkwjsaljdasljdsaljasd lkajsldkjasdljasdlkas ",
         color: "pink"
     }
@@ -35,10 +55,15 @@ const cards= [
 
 
 export default class notes extends Component {
+
+    static navigationOptions= {
+        title: 'Welcome',
+    };
+   
     constructor(props){
         super(props);
         this.state={
-            text: "chino",
+            text: '',
             active: true
         }
     }
@@ -51,7 +76,6 @@ export default class notes extends Component {
             this.setState({text: "false"});
             this.setState({active: !this.state.active});
         }
-        
     }
 
     renderList(){  
@@ -72,16 +96,20 @@ export default class notes extends Component {
 
     renderCardCreator(){  
         let newCard= 
-            <TouchableOpacity onPress={this.changeText} style={[style.cardCreatorButton, {width: cardWidth}]} >
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('noteCreatorView')} 
+                            style={[style.cardCreatorButton, {width: cardWidth}]} >
                 <Text style={style.cardCreatorText}>+</Text>
             </TouchableOpacity>
         return newCard;
     }
 
     render() {
+
+        
+
+
         return (
             <ScrollView style={style.main}>
-               <Navbar name={this.state.text}/>
                <View style={style.cardContainer}>
                     {this.renderCardCreator()}
                     {this.renderList()}
@@ -94,7 +122,9 @@ const style = StyleSheet.create({
     main:{
         paddingTop: Expo.Constants.statusBarHeight,
         backgroundColor: "white",
-        backgroundColor: "#819EED"
+        backgroundColor: "#819EED",
+        
+
     },
     cardContainer:{
         padding: "1%",
@@ -103,7 +133,8 @@ const style = StyleSheet.create({
         flexWrap: "wrap",
         alignItems: "stretch",
         flexDirection: "row",
-        justifyContent: "center"
+        justifyContent: "center",
+        paddingBottom: 30
     },
     cardCreatorButton:{
         backgroundColor: "white",
